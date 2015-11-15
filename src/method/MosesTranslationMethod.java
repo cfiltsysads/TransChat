@@ -38,7 +38,7 @@ public class MosesTranslationMethod {
 	}
 	
 
-	public String process(String sentence) {
+	public String[] process(String sentence) {
 		try 
 		{			
 			//System.out.println("Got : " + sentence);
@@ -61,29 +61,38 @@ public class MosesTranslationMethod {
 			
 			//normedStr = jspellChecker.getCorrectedLine(normedStr);
 		//	System.out.println("Spell Corrected : " + normedStr);
-			 
+			 String[] translated = null;
 			//----------------------------
 			//Step 4 : Translate
 			//----------------------------
-			
-			String translatedStr = translate(normedStr);
+			String translatedStrHi = translate(normedStr, "HOST", "PORT");
+			String translatedStrGu = translate(normedStr, "HOST", "PORT");
+			String translatedStrMr = translate(normedStr, "HOST", "PORT");
+			String translatedStrPa = translate(normedStr, "HOST", "PORT");
+			String translatedStrMa = translate(normedStr, "HOST", "PORT");
 		//	System.out.println("Translated : " + translatedStr);
 			
 			//----------------------------
 			//Step 5 : Transliterate
 			//----------------------------
 			try {
-				translatedStr = Transliterate.doTransliteration(translatedStr);
+				translatedStrHi = Transliterate.doTransliteration(translatedStrHi, "hi");
+				translatedStrGu = Transliterate.doTransliteration(translatedStrGu, "gu");
+				translatedStrMr = Transliterate.doTransliteration(translatedStrMr, "mr");
+				translatedStrPa = Transliterate.doTransliteration(translatedStrPa, "pa");
+				translatedStrMa = Transliterate.doTransliteration(translatedStrMa, "ma");
+				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			translated = new String[] {translatedStrHi, translatedStrGu, translatedStrMr, translatedStrPa, translatedStrMa};
 		//	System.out.println("Transliterated : " + translatedStr);
 			
 			//Now read the score from the file created in the home directory
 			//double score = readScore();
 			//System.out.println(Double.toString(score) + "##" + normedStr + "##" + translatedStr.toString());
-			return translatedStr;
+			return translated;
 		
 		} catch(IOException ioe) {
 			System.out.println(ioe.toString());
@@ -123,7 +132,7 @@ public class MosesTranslationMethod {
 		
 	}
 	
-	private String translate(String normedStr) throws IOException {
+	private String translate(String normedStr, String TRANSLATOR_HOST, String TRANSLATOR_PORT) throws IOException {
 		String line = null;
 		String[] tLateCmd = {
 				"/bin/sh",

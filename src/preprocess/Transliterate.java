@@ -37,12 +37,12 @@ public class Transliterate {
 	 	}
 	 public static void main(String[] args) throws Exception{
 
-			System.out.println(Transliterate.doTransliteration("मेरा नाम is NAman B 223"));
+			//System.out.println(Transliterate.doTransliteration("मेरा नाम is NAman B 223"));
 			//System.out.println(tl.transliterate("223"));
 
 		}
 
-		public static String doTransliteration(String toTransliterate) throws Exception{
+		public static String doTransliteration(String toTransliterate, String lang ) throws Exception{
 
 			String splitString[] = toTransliterate.split(" ");
 			int lengthString = splitString.length;
@@ -67,7 +67,7 @@ public class Transliterate {
 			// Transliterate
 			//String[] transliteratedEnglishWords = englishWords.toString()
 				//	.split(" ");
-			String[] transliteratedEnglishWords = getTransliterationFromGoogle(englishWords.toString().trim()).split(" ");
+			String[] transliteratedEnglishWords = getTransliterationFromGoogle(englishWords.toString().trim(), lang).split(" ");
 					//	.split(" ");
 			
 			
@@ -86,7 +86,7 @@ public class Transliterate {
 
 		}
 
-		public static String getTransliterationFromGoogle(String englishString)
+		public static String getTransliterationFromGoogle(String englishString, String lang)
 				throws Exception {
 			String ip = englishString.replaceAll(" ", "%20");
 		//	System.out.println(ip);

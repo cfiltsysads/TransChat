@@ -36,7 +36,7 @@ public class JSONUtils {
      * Json to notify all the clients about new person joined
      * */
     public String getNewClientJson(String sessionId, String name,
-            String message, int onlineCount) {
+            String message,  int onlineCount) {
         String json = null;
  
         try {
@@ -59,7 +59,7 @@ public class JSONUtils {
      * Json when the client exits the socket connection
      * */
     public String getClientExitJson(String sessionId, String name,
-            String message, int onlineCount) {
+            String message,  int onlineCount) {
         String json = null;
  
         try {
@@ -81,8 +81,8 @@ public class JSONUtils {
     /**
      * JSON when message needs to be sent to all the clients
      * */
-    public String getSendAllMessageJson(String sessionId, String fromName,
-            String message) {
+    public String getSendAllMessageJson(String sessionId, String fromName, 
+            String message, String msgGu, String msgHi, String msgMa, String msgMr, String msgPa) {
         String json = null;
  
         try {

@@ -89,7 +89,7 @@ public class SocketServer {
         }
  
         // Notifying all the clients about new person joined
-        sendMessageToAll(session.getId(), name, " joined conversation!", true,
+        sendMessageToAll(session.getId(), name, " joined conversation!", " बातचीत में शामिल हो गए" , " વાતચીત જોડાયા"  , "  ਗੱਲਬਾਤ ਵਿਚ ਸ਼ਾਮਲ ਹੋ",  "  संभाषणात सामील झाले ", " സംഭാഷണത്തിൽ ചേർന്നു" ,  true,
                 false);
  
     }
@@ -106,7 +106,12 @@ public class SocketServer {
         System.out.println("Message from " + session.getId() + ": " + message);
  
         String msg = null;
-        String msgTranslated = null;
+        String msgHi = null;
+        String msgGu = null;
+        String msgMr = null;
+        String msgPa = null;
+        String msgMa = null;
+        String[] translated = null;
 
  
         // Parsing the json and getting message
@@ -117,7 +122,12 @@ public class SocketServer {
             	  Test t = new Test();
 				MosesTranslationMethod tmMethod = new MosesTranslationMethod(t.dict);
 				
-				msgTranslated = tmMethod.process(msg);
+				translated = tmMethod.process(msg);
+		        msgHi = translated[0];
+		        msgGu = translated[0];
+		        msgMr = translated[0];
+		        msgPa = translated[0];
+		        msgMa = translated[0];
 			} catch (UnknownHostException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -128,11 +138,11 @@ public class SocketServer {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        msg += "  (" + msgTranslated  +" )"; 
+        
  
         // Sending the message to all clients
-        sendMessageToAll(session.getId(), nameSessionPair.get(session.getId()),
-                msg, false, false);
+        sendMessageToAll(session.getId(), nameSessionPair.get(session.getId()), 
+                msg,  msgHi,   msgGu ,   msgPa ,   msgMr ,   msgMa, false, false);
     }
  
     /**
@@ -150,7 +160,7 @@ public class SocketServer {
         sessions.remove(session);
  
         // Notifying all the clients about person exit
-        sendMessageToAll(session.getId(), name, " left conversation!", false,
+        sendMessageToAll(session.getId(), name, " left conversation!", " left conversation!", " left conversation!", " left conversation!", " left conversation!", " left conversation!",  false,
                 true);
  
     }
@@ -167,7 +177,7 @@ public class SocketServer {
      *            flag to identify that a person left the conversation
      * */
     private void sendMessageToAll(String sessionId, String name,
-            String message, boolean isNewClient, boolean isExit) {
+            String message, String msgHi,  String msgGu ,  String msgPa ,  String msgMr ,  String msgMa,   boolean isNewClient, boolean isExit) {
  
         // Looping through all the sessions and sending the message individually
         for (Session s : sessions) {
@@ -175,7 +185,7 @@ public class SocketServer {
  
             // Checking if the message is about new client joined
             if (isNewClient) {
-                json = jsonUtils.getNewClientJson(sessionId, name, message,
+                json = jsonUtils.getNewClientJson(sessionId, name, message, 
                         sessions.size());
  
             } else if (isExit) {
@@ -185,7 +195,7 @@ public class SocketServer {
             } else {
                 // Normal chat conversation message
                 json = jsonUtils
-                        .getSendAllMessageJson(sessionId, name, message);
+                        .getSendAllMessageJson(sessionId, name, message , msgGu, msgHi, msgMa, msgMr, msgPa);
             }
  
             try {

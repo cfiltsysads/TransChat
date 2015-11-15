@@ -192,7 +192,6 @@ function sendMessageToServer(flag, message) {
     myObject.sessionId = sessionId;
     myObject.message = message;
     myObject.flag = flag;
-    myObject.lang = lang
  
     // converting json object to json string
     json = JSON.stringify(myObject);
