@@ -82,7 +82,7 @@ public class JSONUtils {
      * JSON when message needs to be sent to all the clients
      * */
     public String getSendAllMessageJson(String sessionId, String fromName, 
-            String message, String msgGu, String msgHi, String msgMa, String msgMr, String msgPa) {
+            String message, String msgHi,  String msgGu ,  String msgMr ,  String msgPa ,  String msgMa) {
         String json = null;
  
         try {
@@ -91,7 +91,11 @@ public class JSONUtils {
             jObj.put("sessionId", sessionId);
             jObj.put("name", fromName);
             jObj.put("message", message);
- 
+            jObj.put("hindi", msgHi);
+            jObj.put("gujarati", msgGu);
+            jObj.put("marathi", msgMr);
+            jObj.put("punjabi", msgPa);
+            jObj.put("malayalam", msgMa);
             json = jObj.toString();
  
         } catch (JSONException e) {

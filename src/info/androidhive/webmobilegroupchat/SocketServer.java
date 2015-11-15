@@ -142,7 +142,7 @@ public class SocketServer {
  
         // Sending the message to all clients
         sendMessageToAll(session.getId(), nameSessionPair.get(session.getId()), 
-                msg,  msgHi,   msgGu ,   msgPa ,   msgMr ,   msgMa, false, false);
+                msg,  msgHi,   msgGu ,   msgMr ,   msgPa ,   msgMa, false, false);
     }
  
     /**
@@ -177,7 +177,7 @@ public class SocketServer {
      *            flag to identify that a person left the conversation
      * */
     private void sendMessageToAll(String sessionId, String name,
-            String message, String msgHi,  String msgGu ,  String msgPa ,  String msgMr ,  String msgMa,   boolean isNewClient, boolean isExit) {
+            String message, String msgHi,  String msgGu ,  String msgMr ,  String msgPa ,  String msgMa,   boolean isNewClient, boolean isExit) {
  
         // Looping through all the sessions and sending the message individually
         for (Session s : sessions) {
@@ -195,7 +195,7 @@ public class SocketServer {
             } else {
                 // Normal chat conversation message
                 json = jsonUtils
-                        .getSendAllMessageJson(sessionId, name, message , msgGu, msgHi, msgMa, msgMr, msgPa);
+                        .getSendAllMessageJson(sessionId, name, message , msgHi,   msgGu ,   msgMr ,   msgPa ,   msgMa);
             }
  
             try {
