@@ -60,10 +60,9 @@ public class Translator1 implements Callable<String>{
 	@Override
 	public String call( ) throws Exception {
 		
-		String line = null;
 		String finalString="";
-  	  String sent=line;
-  	  String port="10.144.22.105:13056";
+  	  String sent=normedStr;
+  	  String port="10.144.22.105:13012";
 			// Create an instance of XmlRpcClient
 			XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
 			config.setServerURL(new URL("http://"+port+"/RPC2"));
