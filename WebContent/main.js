@@ -149,7 +149,7 @@ function parseMessage(message) {
         }
  
         var li = '<br><span class="name"><b>' + from_name + '</b></span> '
-                + jObj.message ;
+                + jObj.hindi ;
  
         // appending the chat message to list
         appendChatMessage(li);

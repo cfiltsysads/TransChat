@@ -128,6 +128,7 @@ public class SocketServer {
 		        msgMr = translated[0];
 		        msgPa = translated[0];
 		        msgMa = translated[0];
+		        msg= msg + " ("+msgHi+")";
 			} catch (UnknownHostException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

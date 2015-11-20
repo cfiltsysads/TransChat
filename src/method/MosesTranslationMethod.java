@@ -13,6 +13,10 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.HashSet;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import preprocess.Compressor;
 import preprocess.Transliterate;
@@ -42,7 +46,7 @@ public class MosesTranslationMethod {
 		try 
 		{			
 			//System.out.println("Got : " + sentence);
-			
+			ExecutorService pool = Executors.newFixedThreadPool(10);
 			//----------------------------
 			//Step 1 : Decompress
 			//----------------------------
@@ -58,35 +62,50 @@ public class MosesTranslationMethod {
 			//----------------------------
 			//Step 3 : spell check
 			//----------------------------
-			
+			System.out.println("#####"+normedStr+"######");
+
 			//normedStr = jspellChecker.getCorrectedLine(normedStr);
 		//	System.out.println("Spell Corrected : " + normedStr);
 			 String[] translated = null;
 			//----------------------------
 			//Step 4 : Translate
 			//----------------------------
-			String translatedStrHi = translate(normedStr, "HOST", "PORT");
-			String translatedStrGu = translate(normedStr, "HOST", "PORT");
-			String translatedStrMr = translate(normedStr, "HOST", "PORT");
-			String translatedStrPa = translate(normedStr, "HOST", "PORT");
-			String translatedStrMa = translate(normedStr, "HOST", "PORT");
-		//	System.out.println("Translated : " + translatedStr);
+			//Translator hi = new Translator(normedStr, "10.144.22.121", "1235");
+			 
+			Translator hi = new Translator(normedStr, "10.144.22.105", "13012");
+
+			//Translator gu = new Translator(normedStr, "HOST", "13011");
+			//Translator mr = new Translator(normedStr, "HOST", "13015");
+			//Translator pa = new Translator(normedStr, "HOST", "13016");
+			//Translator ma = new Translator(normedStr, "HOST", "13014");
+
+			Future <String> translatedStrHi = pool.submit(hi);
+			Future <String> translatedStrGu = pool.submit(hi);
+			Future <String> translatedStrMr = pool.submit(hi);
+			Future <String> translatedStrPa = pool.submit(hi);
+			Future <String> translatedStrMa = pool.submit(hi);
 			
+		
+			
+			
+		//	System.out.println("Translated : " + translatedStr);
+			System.out.println("#####"+translatedStrHi+"######");
 			//----------------------------
 			//Step 5 : Transliterate
 			//----------------------------
-			try {
-				translatedStrHi = Transliterate.doTransliteration(translatedStrHi, "hi");
-				translatedStrGu = Transliterate.doTransliteration(translatedStrGu, "gu");
+			
+				
+				//translatedStrHi = Transliterate.doTransliteration(translatedStrHi.get(), "hi");
+				/*translatedStrGu = Transliterate.doTransliteration(translatedStrGu, "gu");
 				translatedStrMr = Transliterate.doTransliteration(translatedStrMr, "mr");
 				translatedStrPa = Transliterate.doTransliteration(translatedStrPa, "pa");
-				translatedStrMa = Transliterate.doTransliteration(translatedStrMa, "ma");
+				translatedStrMa = Transliterate.doTransliteration(translatedStrMa, "ma");*/
 				
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			translated = new String[] {translatedStrHi, translatedStrGu, translatedStrMr, translatedStrPa, translatedStrMa};
+			//pool.shutdown();
+			//pool.awaitTermination(Long.MAX_VALUE , TimeUnit.NANOSECONDS);
+			String s = translatedStrHi.get();
+			System.out.println(s);
+			translated = new String[] {s/*, translatedStrGu, translatedStrMr, translatedStrPa, translatedStrMa*/};
 		//	System.out.println("Transliterated : " + translatedStr);
 			
 			//Now read the score from the file created in the home directory
@@ -94,8 +113,8 @@ public class MosesTranslationMethod {
 			//System.out.println(Double.toString(score) + "##" + normedStr + "##" + translatedStr.toString());
 			return translated;
 		
-		} catch(IOException ioe) {
-			System.out.println(ioe.toString());
+		} catch(Exception ioe) {
+			ioe.printStackTrace();
 			return null;
 		}
 		
