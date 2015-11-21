@@ -7,6 +7,7 @@ var name = '';
 // socket connection url and port
 var socket_url = '10.105.19.100';
 var port = '8080';
+var lang = 'English'
  
 $(document).ready(function() {
  
@@ -15,7 +16,12 @@ $(document).ready(function() {
         join();
     });
 });
- 
+function changeLang(){
+	var x = document.getElementById("langSelect").value;
+	//alert(x);
+	lang=x;
+	//alert(lang);
+} 
 var webSocket;
  
 /**
@@ -147,10 +153,43 @@ function parseMessage(message) {
         if (jObj.sessionId != sessionId) {
             from_name = jObj.name;
         }
- 
+        if(lang == "English")
+        {
         var li = '<br><span class="name"><b>' + from_name + '</b></span> '
-                + jObj.hindi  ;
- 
+                + jObj.message  ;
+        }
+        else if(lang == "Hindi")
+        {
+            var li = '<br><span class="name"><b>' + from_name + '</b></span> '
+                    + jObj.hindi  ;
+         }
+        else if(lang == "Gujarati")
+        {
+            var li = '<br><span class="name"><b>' + from_name + '</b></span> '
+                    + jObj.gujarati  ;
+            }
+        else if(lang == "Marathi")
+        {
+            var li = '<br><span class="name"><b>' + from_name + '</b></span> '
+                    + jObj.marathi  ;
+            }
+        else if(lang == "Punjabi")
+        {
+            var li = '<br><span class="name"><b>' + from_name + '</b></span> '
+                    + jObj.punjabi  ;
+            }
+        else if(lang == "Malayalam")
+        {
+            var li = '<br><span class="name"><b>' + from_name + '</b></span> '
+                    + jObj.malayalam  ;
+            }
+        else
+        {
+            var li = '<br><span class="name"><b>' + from_name + '</b></span> '
+                    + jObj.message  ;
+            }
+        
+        
         // appending the chat message to list
         appendChatMessage(li);
  

@@ -8,8 +8,13 @@
 <script type="text/javascript" src="jquery-1.11.1.min.js"></script>
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="css/bootstrap.css" />
+<link rel="stylesheet" href="css/bootstrap-select.css" />
 <script type="text/javascript" src="main.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
+<script>
+$('.selectpicker').selectpicker();
+
+</script>
 </head>
 
 <div id="wrapper" class="container-fluid" style="width:100%">
@@ -25,37 +30,45 @@
 		
 </div>
 <div id="content" style="width:100%;height:12%;margin-right:1%">
-	<div id="rightPane"  style="width:20%;float:left;margin-bottom:10px;">   
+	<div id="rightPane"  style="width:20%;height:100%;float:left;margin-bottom:10px;margin-left:10px;margin-right:10px;">   
  
-        <div id="prompt_name_container" class="box_shadow">
-            <p>Enter your name</p>
+        <div id="prompt_name_container" style="margin-top:60%;">
+            <!-- p>Please enter your name to join a conversation: </p>  -->
             <form id="form_submit" method="post">
-                <input type="text" id="input_name" /> 
-                <input type="submit" value="JOIN" id="btn_join">
+                <input type="text" class="form-control" id="input_name" placeholder="Enter name here to join conversion " style="width:100%;"/> <br/>
+                <center><input type="submit" class="btn btn-primary" value="JOIN" id="btn_join" /></center>
             </form>
         </div>
 	</div>
- 	<div id ="leftPane" style="width:50%;float:right;margin-bottom:10px;">
+ 	<div id ="leftPane" style="width:75%;float:right;margin-bottom:10px;">
  
-        <div id="message_container" class="box_shadow">
+        <div id="message_container" class="box_shadow" style="display: none;">
+        
+        <div id="selection">
+        	Language Selector:&nbsp;
+        	<select id="langSelect" class="selectpicker" onchange="changeLang()">
+        		<option value="English">English</option>
+    			<option value="Hindi">Hindi</option>
+    			<option value="Gujarati">Gujarati</option>
+    			<option value="Marathi">Marathi</option>
+    			<option value="Punjabi">Punjabi</option>
+    			<option value="Malayalam">Malayalam</option>
+  			</select>
+           <br/><br/>
+            <span id="messages" class="form-control" style="height:400px;width:90%;display: block;overflow: auto;"></span>
  
-            <ul id="messages">
-            </ul>
  
- 
-            <div id="input_message_container">
+            <div id="input_message_container" style="width:90%;">
                 <form id="form_send_message" method="post" action="#">
-                    <input type="text" id="input_message"
-                        placeholder="Type your message here..." /> <input type="submit"
-                        id="btn_send" onclick="send();" value="Send" />
+                	<br/><br/>
+                    <input type="text" id="input_message" class="form-control" placeholder="Type your message here..." /> <br/><br/>
+                    <input type="submit" class="btn btn-lg btn-success" id="btn_send" onclick="send();" value="Send" />                    
+                    <input type="button" style="float:right;" class="btn btn-danger" onclick="closeSocket();" value="Leave Chat Room" id="btn_close" />
                     <div class="clear"></div>
                 </form>
-            </div>
-            <div>
- 
-                <input type="button" onclick="closeSocket();"
-                    value="Leave Chat Room" id="btn_close" />
-            </div>
+			</div>
+        
+        </div>
  
         </div>
  

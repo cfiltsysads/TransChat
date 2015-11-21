@@ -74,10 +74,10 @@ public class MosesTranslationMethod {
 			 
 			Translator hi = new Translator(normedStr, "10.144.22.121", "1235");
 
-			Translator1 gu = new Translator1(normedStr, "10.144.22.105", "13011");
-			Translator1 mr = new Translator1(normedStr, "10.144.22.105", "13015");
-			Translator1 pa = new Translator1(normedStr, "10.144.22.105", "13016");
-			Translator1 ma = new Translator1(normedStr, "10.144.22.105", "13014");
+			Translator1 gu = new Translator1(normedStr, "10.144.22.105", "13011", "gu");
+			Translator1 mr = new Translator1(normedStr, "10.144.22.105", "13015", "mr");
+			Translator1 pa = new Translator1(normedStr, "10.144.22.105", "13016", "pa");
+			Translator1 ma = new Translator1(normedStr, "10.144.22.105", "13014", "ml");
 			Future <String> translatedStrHi = pool.submit(hi);
 			Future <String> translatedStrGu = pool.submit(gu);
 			Future <String> translatedStrMr = pool.submit(mr);

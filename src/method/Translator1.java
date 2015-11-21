@@ -14,11 +14,12 @@ public class Translator1 implements Callable<String>{
 	String normedStr; String TRANSLATOR_HOST; String TRANSLATOR_PORT; String lang;
 	
 	public Translator1(String normedStr, String tRANSLATOR_HOST,
-			String tRANSLATOR_PORT) {
+			String tRANSLATOR_PORT, String lang) {
 		super();
 		this.normedStr = normedStr;
 		TRANSLATOR_HOST = tRANSLATOR_HOST;
 		TRANSLATOR_PORT = tRANSLATOR_PORT;
+		this.lang = lang;
 		
 	}
 	private static String replacePipes(String str) {
@@ -40,15 +41,17 @@ public class Translator1 implements Callable<String>{
 		String ip = englishString.replaceAll(" ", "%20");
 	//	System.out.println(ip);
 		URL url = new URL(
-				"http://www.google.com/inputtools/request?ime=transliteration_en_hi&num=5&cp=0&cs=0&ie=utf-8&oe=utf-8&text="
-						+ ip);
+
+       "http://www.google.com/inputtools/request?ime=transliteration_en_"+lang+"&num=5&cp=0&cs=0&ie=utf-8&oe=utf-8&text="+ ip);
 		URLConnection connection = url.openConnection();
 		connection.connect();
 		BufferedReader in = new BufferedReader(new InputStreamReader(
 				connection.getInputStream()));
 		String inputLine;
 		String res = null;
+		
 		while ((inputLine = in.readLine()) != null) {
+			System.out.println("THIS IS THE INPUT LINE"+inputLine);
 			String s = inputLine.split(",")[2].replaceAll("\\[\"", "");
 			res = s.substring(0, s.length() - 1);
 		//	System.out.println(res);
@@ -94,7 +97,7 @@ public class Translator1 implements Callable<String>{
 				{
 					word=word.trim();
 					word=word.replace("|UNK|UNK|UNK", "");
-					word=getTransliterationFromGoogle(word.toString().trim(), "f");
+					word=getTransliterationFromGoogle(word.toString().trim(), lang);
 					splitString[i]=word;
 				}
 			}
