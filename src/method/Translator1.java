@@ -58,13 +58,14 @@ public class Translator1 implements Callable<String>{
 	}
 
 	@Override
-	public String call( ) throws Exception {
+	public String call( )   {
 		
 		String finalString="";
   	  String sent=normedStr;
-  	  String port="10.144.22.105:13012";
+  	  String port=TRANSLATOR_HOST+":"+TRANSLATOR_PORT;
 			// Create an instance of XmlRpcClient
-			XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
+			try{
+  	  		XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
 			config.setServerURL(new URL("http://"+port+"/RPC2"));
 			XmlRpcClient client = new XmlRpcClient();
 			client.setConfig(config);
@@ -99,7 +100,12 @@ public class Translator1 implements Callable<String>{
 			}
 			finalString = String.join(" ", splitString);
 			finalString = finalString.replace("|UNK|UNK|UNK", "");
-			System.out.println(finalString);
+			System.out.println(finalString);}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				
+			}
 			
 		return finalString.toString().trim();
 

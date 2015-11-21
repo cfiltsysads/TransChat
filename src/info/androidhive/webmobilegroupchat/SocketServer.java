@@ -124,11 +124,11 @@ public class SocketServer {
 				
 				translated = tmMethod.process(msg);
 		        msgHi = translated[0];
-		        msgGu = translated[0];
-		        msgMr = translated[0];
-		        msgPa = translated[0];
-		        msgMa = translated[0];
-		        msg= msg + " ("+msgHi+")";
+		        msgGu = translated[1];
+		        msgMr = translated[2];
+		        msgPa = translated[3];
+		        msgMa = translated[4];
+		        //msg= msg + " ("+msgHi+")";
 			} catch (UnknownHostException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

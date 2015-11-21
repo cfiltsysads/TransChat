@@ -133,7 +133,7 @@ function parseMessage(message) {
         }
  
         var li = '<li class="new"><span class="name">' + new_name + '</span> '
-                + jObj.message + '</li>';
+                + jObj.message +'</li>';
         $('#messages').append(li);
  
         $('#input_message').val('');
@@ -149,7 +149,7 @@ function parseMessage(message) {
         }
  
         var li = '<br><span class="name"><b>' + from_name + '</b></span> '
-                + jObj.hindi ;
+                + jObj.hindi  ;
  
         // appending the chat message to list
         appendChatMessage(li);
@@ -159,7 +159,7 @@ function parseMessage(message) {
     } else if (jObj.flag == 'exit') {
         // if the json flag is 'exit', it means somebody left the chat room
         var li = '<li class="exit"><span class="name red">' + jObj.name
-                + '</span> ' + jObj.message + '</li>';
+                + '</span> ' + jObj.message +'</li>';
  
         var online_count = jObj.onlineCount;
  

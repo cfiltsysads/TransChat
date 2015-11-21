@@ -72,18 +72,17 @@ public class MosesTranslationMethod {
 			//----------------------------
 			//Translator hi = new Translator(normedStr, "10.144.22.121", "1235");
 			 
-			Translator1 hi = new Translator1(normedStr, "10.144.22.105", "13012");
+			Translator hi = new Translator(normedStr, "10.144.22.121", "1235");
 
-			//Translator gu = new Translator(normedStr, "HOST", "13011");
-			//Translator mr = new Translator(normedStr, "HOST", "13015");
-			//Translator pa = new Translator(normedStr, "HOST", "13016");
-			//Translator ma = new Translator(normedStr, "HOST", "13014");
-
+			Translator1 gu = new Translator1(normedStr, "10.144.22.105", "13011");
+			Translator1 mr = new Translator1(normedStr, "10.144.22.105", "13015");
+			Translator1 pa = new Translator1(normedStr, "10.144.22.105", "13016");
+			Translator1 ma = new Translator1(normedStr, "10.144.22.105", "13014");
 			Future <String> translatedStrHi = pool.submit(hi);
-			//Future <String> translatedStrGu = pool.submit(hi);
-			//Future <String> translatedStrMr = pool.submit(hi);
-			//Future <String> translatedStrPa = pool.submit(hi);
-			//Future <String> translatedStrMa = pool.submit(hi);
+			Future <String> translatedStrGu = pool.submit(gu);
+			Future <String> translatedStrMr = pool.submit(mr);
+			Future <String> translatedStrPa = pool.submit(pa);
+			Future <String> translatedStrMa = pool.submit(ma);
 			
 		
 			
@@ -101,11 +100,22 @@ public class MosesTranslationMethod {
 				translatedStrPa = Transliterate.doTransliteration(translatedStrPa, "pa");
 				translatedStrMa = Transliterate.doTransliteration(translatedStrMa, "ma");*/
 				
-			//pool.shutdown();
-			//pool.awaitTermination(Long.MAX_VALUE , TimeUnit.NANOSECONDS);
-			String s = translatedStrHi.get();
-			System.out.println(s);
-			translated = new String[] {s/*, translatedStrGu, translatedStrMr, translatedStrPa, translatedStrMa*/};
+			pool.shutdown();
+			pool.awaitTermination(Long.MAX_VALUE , TimeUnit.NANOSECONDS);
+			String shi = translatedStrHi.get();
+			String sgu = translatedStrGu.get();
+			String smr = translatedStrMr.get();
+			String spa = translatedStrPa.get();
+			String sma = translatedStrMa.get();
+			System.out.println(shi);
+			System.out.println(sgu);
+			System.out.println(smr);
+			System.out.println(spa);
+			System.out.println(sma);
+			
+			
+			
+			translated = new String[] {shi, sgu, smr, spa, sma};
 		//	System.out.println("Transliterated : " + translatedStr);
 			
 			//Now read the score from the file created in the home directory
