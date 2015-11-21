@@ -89,7 +89,7 @@ public class SocketServer {
         }
  
         // Notifying all the clients about new person joined
-        sendMessageToAll(session.getId(), name, " joined conversation!", " बातचीत में शामिल हो गए" , " વાતચીત જોડાયા"  , "  ਗੱਲਬਾਤ ਵਿਚ ਸ਼ਾਮਲ ਹੋ",  "  संभाषणात सामील झाले ", " സംഭാഷണത്തിൽ ചേർന്നു" ,  true,
+        sendMessageToAll(session.getId(), name, " joined conversation!", " बातचीत में शामिल हो गए" , " વાતચીત જોડાયા"  , "  ਗੱਲਬਾਤ ਵਿਚ ਸ਼ਾਮਲ ਹੋ",  "  संभाषणात सामील झाले", " സംഭാഷണത്തിൽ ചേർന്നു" ,  true,
                 false);
  
     }
